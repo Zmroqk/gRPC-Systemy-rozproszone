@@ -1,0 +1,28 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Services.CloudService";
+
+package CloudService;
+
+// Service for uploading/downloading images
+service CloudService {
+	//Upload image
+	rpc Upload (stream ImageData) returns (Bool);
+	//Download image
+	rpc Download (DownloadImageRequest) returns (stream ImageData);
+}
+
+message Bool {
+	bool Success = 1;
+}
+
+//Empty message
+message DownloadImageRequest {
+	string fileName = 1;
+}
+
+//Part of image data
+message ImageData {
+	string fileName = 1;
+	bytes data = 2;
+}

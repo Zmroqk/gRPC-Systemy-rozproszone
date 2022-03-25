@@ -1,0 +1,52 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Background="Gray"
+        Title="MainWindow" Height="540" Width="960">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <DatePicker x:Name="datePicker"/>
+            <TextBox x:Name="txbTemperature"/>
+            <TextBox x:Name="txbHumidity"/>
+            <TextBox x:Name="txbPressure"/>
+            <Button Content="Save data" Click="Button_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <DatePicker x:Name="datePickerGetAtmospheric"/>
+            <Button Content="Get data" Click="AtmosphericData_Click"/>
+            <ListBox x:Name="ListAtmosphericData">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Date}"/>
+                            <Label Content="{Binding Temperature}"/>
+                            <Label Content="{Binding Humidity}"/>
+                            <Label Content="{Binding Pressure}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            
+        </StackPanel>
+    </Grid>
+</Window>

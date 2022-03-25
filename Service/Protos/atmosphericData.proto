@@ -1,0 +1,42 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Services.AtmosphericData";
+
+package AtmosphericData;
+
+// Handle saving atmospheric data
+service AtmosphericDataHandler {
+  // Save atmospheric data
+  rpc SaveData (AtmosphericData) returns (Bool);
+
+  // Get all data recorded
+  rpc GetAllData (Empty) returns (AtmosphericDataResponse);
+
+  // Get data that was recorded at specific day
+  rpc GetData (AtmosphericDataRequest) returns (AtmosphericDataResponse);
+}
+
+// Empty message
+message Empty {}
+
+message Bool {
+	bool Success = 1;
+}
+
+// Atmospheric data message
+message AtmosphericData {
+  string date = 1;
+  double temperature = 2;
+  double humidity = 3;
+  double pressure = 4;
+}
+
+// Atmospheric data request for specific day
+message AtmosphericDataRequest {
+	string date = 1;
+}
+
+// Atmospheric data response as a list of AtmosphericData
+message AtmosphericDataResponse {
+	repeated AtmosphericData data = 1;
+}
