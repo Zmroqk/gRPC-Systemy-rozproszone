@@ -17,6 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
+            <Label x:Name="labelSaveDataError" HorizontalAlignment="Center"/>
             <DatePicker x:Name="datePicker"/>
             <TextBox x:Name="txbTemperature"/>
             <TextBox x:Name="txbHumidity"/>
@@ -26,27 +27,47 @@
         <StackPanel Grid.Row="1" Grid.Column="0">
             <DatePicker x:Name="datePickerGetAtmospheric"/>
             <Button Content="Get data" Click="AtmosphericData_Click"/>
-            <ListBox x:Name="ListAtmosphericData">
+            <ScrollViewer Background="Transparent">
+                <ListBox x:Name="ListAtmosphericData">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{Binding Date}" Grid.Column="0"/>
+                                <Label Content="{Binding Temperature}" Grid.Column="1"/>
+                                <Label Content="{Binding Humidity}" Grid.Column="2"/>
+                                <Label Content="{Binding Pressure}" Grid.Column="3"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <Button Content="Send file to server" Click="SendFile_Click"/>
+            <ProgressBar x:Name="pbUpload" Height="20"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <ListBox x:Name="ListFilesAvailable" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Date}"/>
-                            <Label Content="{Binding Temperature}"/>
-                            <Label Content="{Binding Humidity}"/>
-                            <Label Content="{Binding Pressure}"/>
+
+                            <Label Content="{Binding .}"/>
+                            <Button Content="Download" Grid.Column="1" Click="DownloadFile_Click" Tag="{Binding .}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="0">
-            
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

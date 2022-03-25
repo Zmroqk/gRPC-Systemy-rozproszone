@@ -10,7 +10,11 @@ service CloudService {
 	rpc Upload (stream ImageData) returns (Bool);
 	//Download image
 	rpc Download (DownloadImageRequest) returns (stream ImageData);
+	//Returns list of files on server
+	rpc ListFiles (Empty) returns (stream ImagesList);
 }
+
+message Empty {}
 
 message Bool {
 	bool Success = 1;
@@ -24,5 +28,11 @@ message DownloadImageRequest {
 //Part of image data
 message ImageData {
 	string fileName = 1;
-	bytes data = 2;
+	int32 fileSize = 2;
+	bytes data = 3;
+}
+
+// List of files
+message ImagesList {
+	repeated string fileNames = 1;
 }

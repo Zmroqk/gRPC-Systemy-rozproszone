@@ -24,7 +24,10 @@ namespace Service.Services
         {
             var response = new AtmosphericDataResponse();
             response.Data.AddRange(CollectedData);
-            return Task.FromResult(response);
+            return Task.Run(() => {
+                Thread.Sleep(1000);
+                return response;
+                });
         }
 
         public override Task<AtmosphericDataResponse> GetData(AtmosphericDataRequest request, ServerCallContext context)
